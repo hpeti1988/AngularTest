@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Book } from '../book.model';
 import { Newspaper } from '../newspaper.model';
 
-
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
@@ -22,15 +21,12 @@ export class BookListComponent implements OnInit {
     new Newspaper('Magyar Nemzet'),
   ];
 
+  
   constructor(private bookService: BookService) { }
 
   ngOnInit() {    
-    this.getBooks();
+    this.bookService.getBooks().subscribe(res => this.books = res)
     console.log(this.books)
-  }
-
-  getBooks() {
-    this.bookService.getBooks().subscribe((res) => this.books = res)
   }
 
 }
