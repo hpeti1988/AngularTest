@@ -1,6 +1,8 @@
+import { BookService } from './../book.service';
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../book.model';
 import { Newspaper } from '../newspaper.model';
+
 
 @Component({
   selector: 'app-book-list',
@@ -13,16 +15,22 @@ export class BookListComponent implements OnInit {
     new Book('Boys from Pál street', 'RIP Nemecsek'),
     new Book('Sons of a man with stone heart', '')
   ];
-
+  
   private newspapers = [
     new Newspaper('Blikk'),
     new Newspaper('Népszabadság'),
     new Newspaper('Magyar Nemzet'),
   ];
 
-  constructor() { }
+  constructor(private bookService: BookService) { }
 
-  ngOnInit() {
+  ngOnInit() {    
+    this.getBooks();
+    console.log(this.books)
+  }
+
+  getBooks() {
+    this.bookService.getBooks().subscribe((res) => this.books = res)
   }
 
 }

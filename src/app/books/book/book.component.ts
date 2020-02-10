@@ -10,8 +10,13 @@ import { LoggerService } from 'src/app/logger.service';
 export class BookComponent implements OnInit {
   @Input()
   model: Book;
-  constructor() { }
+  constructor(private loggerService: LoggerService) { }
 
   ngOnInit() {
+    this.logging();
+  }
+
+  logging() {
+    this.loggerService.log(this.model.title);
   }
 }
